@@ -45,7 +45,12 @@ function addItem(){
 function checkCheckBox(itemId){
     for(let i=0;i<list.length;i++){
         if(list[i].id==itemId){
-            list[i].class = "checked";
+            if(list[i].class != "checked"){
+                list[i].class = "checked";
+            }
+            else
+                list[i].class = "";
+
         }
     }
     render();
