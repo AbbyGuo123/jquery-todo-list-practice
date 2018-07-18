@@ -31,13 +31,31 @@ class App extends Component {
         <form id="todoForm">
           {this.state.itemList}
         </form>
+        <div>
+            <ul id="filters">
+            <li>
+                    <a href="#" data-filter="all" className="selected" onClick={this.clickStatus.bind(this,"")}>ALL</a>
+                </li>
+                <li>
+                    <a href="#" data-filter="active" className="" onClick={this.clickStatus.bind(this,"checked")}>Active</a>
+                </li>
+                <li>
+                    <a href="#" data-filter="complete" className="" onClick={this.clickStatus.bind(this,"")}>Complete</a>
+                </li>
+            </ul>
+
         </div>
+        </div>
+        
+
       </div>
     );
   }
   AddItemFun=(event)=>{
-    this.state.itemList.push(<AddItem id={this.generateUUID} value={event.target.parentNode.children[0].value} class=""/>)
-    console.log(event.target.parentNode.children[0].value);
+    console.log("1111111");
+    this.state.itemList.push(<AddItem id ={this.generateUUID()} value={event.target.parentNode.children[0].value} class=""/>);
+    console.log(event.target.parentNode.parentNode)
+
     this.setState(this.state.itemList);
     event.target.parentNode.children[0].value = "";
   }
@@ -60,6 +78,12 @@ class App extends Component {
                 : random)).toString(16);
     }
     return uuid;
+}
+
+clickStatus=(status)=>{
+  this.state.itemList = this.state.itemList.map(x=>x=="");
+ console.log(status);
+  this.setState(this.state);
 }
 }
 
