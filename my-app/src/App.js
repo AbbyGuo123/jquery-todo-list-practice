@@ -81,7 +81,8 @@ class App extends Component {
 }
 
 clickStatus=(status)=>{
-  this.state.itemList = this.state.itemList.map(x=>x=="");
+  console.log(this.state)
+  this.state.itemList = this.state.itemList.map(x=>x.class==status);
  console.log(status);
   this.setState(this.state);
 }
