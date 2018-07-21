@@ -1,6 +1,6 @@
 import {connect} from 'react-redux'
 import AddItem from "../component/AddItem";
-import {showFilterListmap,addMap} from '../actions/index'
+import {addMap} from '../actions/index'
 
 const mapStateToProps = (state, ownProps) =>({
   todos:state.todos,
