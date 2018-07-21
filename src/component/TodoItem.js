@@ -5,25 +5,25 @@ import '../App.css';
 class TodoItem extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      status: 'read'
-    };
   }
 
   changeToEditable() {
-    this.setState({ status: 'write' });
+    const changeStatusfromMap = this.props.changeStatusfromMap;
+    changeStatusfromMap('write');
   }
 
   updateItem(e, viewId, content) {
     if (e.keyCode === 13) {
+      const changeStatusfromMap = this.props.changeStatusfromMap;
       this.props.updateItemContent(viewId, content);
       // console.log(this.props.item);
-      this.setState({ status: 'read' });
+      changeStatusfromMap('read');
     }
   }
 
   toggleActive(viewId) {
-    this.setState({ status: 'read' });
+    const changeStatusfromMap = this.props.changeStatusfromMap;
+    changeStatusfromMap('read')
     this.props.toggleActiveHandler(viewId);
   }
 
@@ -40,7 +40,7 @@ class TodoItem extends Component {
           />
         }
         <span onDoubleClick={e => this.changeToEditable(e)}>
-          {this.state.status === 'read' ? (
+          {this.props.status === 'read' ? (
             item.content
           ) : (
             <input

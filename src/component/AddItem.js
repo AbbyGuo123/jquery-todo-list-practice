@@ -15,7 +15,7 @@ class AddItem extends Component {
           const addfromMap = this.props.addfromMap;
           todosAPI.add(new Todo(this.refs.newItem.value));
           const todos = this.deepCopy(
-            todosAPI.filerByStatus(Todo.ALL)
+            todosAPI.filerByStatus(this.props.statusOfList)
           );
           addfromMap(todos);
           this.refs.newItem.value = '';
