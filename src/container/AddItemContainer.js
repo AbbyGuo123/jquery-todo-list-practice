@@ -1,5 +1,5 @@
 import {connect} from 'react-redux'
-import App from "../App";
+import AddItem from "../component/AddItem";
 import {showFilterListmap,addMap} from '../actions/index'
 
 const mapStateToProps = (state, ownProps) =>({
@@ -10,4 +10,4 @@ const mapStateToProps = (state, ownProps) =>({
 const mapDispatchToProps = (dispatch, ownProps) =>({
   addfromMap:(todos) => dispatch(addMap (todos)),
 })
-export default connect(mapStateToProps, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(AddItem)

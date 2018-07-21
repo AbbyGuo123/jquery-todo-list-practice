@@ -5,6 +5,7 @@ import Todo from './model/Todo';
 import TodoItem from './component/TodoItem';
 import classNames from 'classnames';
 import todosAPI from './api/TodoResourseAPI';
+import AddItemContainer from './container/AddItemContainer';
 
 class App extends Component {
   constructor(props) {
@@ -78,7 +79,7 @@ class App extends Component {
             <em>Simple Todo List with adding and filter by diff status.</em>
           </p>
         </div>
-        <div>
+        {/* <div>
           <input
             className="input-text"
             // onKeyUp={e => this.add(e)}
@@ -88,7 +89,8 @@ class App extends Component {
           <div className="button" onClick={e => this.add()}>
             Add
           </div>
-        </div>
+        </div> */}
+        <AddItemContainer />
         <div>
           <ol>
             {(() => {
