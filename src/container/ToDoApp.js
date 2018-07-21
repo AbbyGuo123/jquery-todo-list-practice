@@ -8,9 +8,9 @@ const mapStateToProps = (state, ownProps) =>({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) =>({
-  addfromMap:(todos) => dispatch(addMap (todos)),
-  showFilterListfromMap:(todos, statusOfList) => dispatch(showFilterListMap(todos, statusOfList)),
-  updateItemContentfromMap:(todos, statusOfList) => dispatch(updateItemContentMap(todos, statusOfList)),
-  toggleActivefromMap:(todos) => dispatch(toggleActiveMap(todos))
+  // addfromMap:(todos) => dispatch(addMap (todos)),
+  // showFilterListfromMap:(todos, statusOfList) => dispatch(showFilterListMap(todos, statusOfList)),
+  // updateItemContentfromMap:(todos, statusOfList) => dispatch(updateItemContentMap(todos, statusOfList)),
+  // toggleActivefromMap:(todos) => dispatch(toggleActiveMap(todos))
 })
 export default connect(mapStateToProps, mapDispatchToProps)(App)
