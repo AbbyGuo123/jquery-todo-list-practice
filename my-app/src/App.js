@@ -7,8 +7,9 @@ import AddItem from './Component/AddItem';
 class App extends Component {
   constructor(propos){
     super(propos);
-    this.state={itemList:[]};
+    this.state={itemList:[],filterlistByStatus:[],status:"all"};
 }
+
   render() {
     return (
       <div className="App">
@@ -29,12 +30,12 @@ class App extends Component {
         </div>
         <br/>
         <form id="todoForm">
-          {this.state.itemList}
+            {this.generateItemList()}
         </form>
         <div>
             <ul id="filters">
             <li>
-                    <a href="#" data-filter="all" className="selected" onClick={this.clickStatus.bind(this,"")}>ALL</a>
+                    <a href="#" data-filter="all" className="selected" onClick={this.clickStatus.bind(this,"all")}>ALL</a>
                 </li>
                 <li>
                     <a href="#" data-filter="active" className="" onClick={this.clickStatus.bind(this,"checked")}>Active</a>
@@ -52,12 +53,26 @@ class App extends Component {
     );
   }
   AddItemFun=(event)=>{
-    console.log("1111111");
-    this.state.itemList.push(<AddItem id ={this.generateUUID()} value={event.target.parentNode.children[0].value} class=""/>);
-    console.log(event.target.parentNode.parentNode)
+      let newItemList = [...this.state.itemList];
+      let id1 = this.generateUUID();
+      newItemList.push({id :id1, value:event.target.parentNode.children[0].value, className:"", checkBoxListen:this.checkBoxListen});
+      console.log(newItemList);
+      this.state.itemList = newItemList;
+      this.state.filterlistByStatus = newItemList;
+      this.setState(this.state);
+      console.log(this.state.itemList);
+      event.target.parentNode.children[0].value = "";
+  }
 
-    this.setState(this.state.itemList);
-    event.target.parentNode.children[0].value = "";
+  generateItemList=()=>{
+      let arr = [...this.state.filterlistByStatus];
+      let list = [];
+      console.log(this.state.filterlistByStatus);
+      console.log(arr);
+      for(let i=0;i<arr.length;i++){
+          list.push(<AddItem id ={arr[i].id} value={arr[i].value} className={arr[i].className} checkBoxListen={this.checkBoxListen} />)
+      }
+      return list;
   }
 
   generateUUID=()=>{
@@ -81,11 +96,44 @@ class App extends Component {
 }
 
 clickStatus=(status)=>{
-  console.log(this.state)
-  this.state.itemList = this.state.itemList.map(x=>x.class==status);
- console.log(status);
+  if(status=="all"){
+    this.state.filterlistByStatus = this.state.itemList;
+  }
+  else{
+      let showList = [];
+      for(let item of this.state.itemList){
+          if(item.className===status){
+            showList.push(item);
+          }
+      }
+    this.state.filterlistByStatus = showList;
+  }
+  this.state.status = status;
   this.setState(this.state);
 }
+
+checkBoxListen=(id)=>{
+      let arr = [...this.state.itemList];
+      console.log(this.state.itemList);
+    console.log("aaaaaa");
+    console.log(arr);
+    for(let i=0;i<arr.length;i++){
+        if(arr[i].id===id){
+            // console.log(arr[i]);
+            if( arr[i].className==="")
+                arr[i].className ='checked';
+            else
+                arr[i].className = '';
+        }
+
+      }
+      console.log(arr);
+      this.state.itemList = arr;
+      this.setState(this.state);
+
+}
+
+
 }
 
 
