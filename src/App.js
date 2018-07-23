@@ -6,6 +6,7 @@ import AddItemContainer from './container/AddItemContainer';
 import FilterStatusContainer from './container/FilterStatusContainer';
 import ShowItemListContainer from './container/ShowItemListContainer';
 import Header from './component/Header';
+import axios from 'axios';
 
 class App extends Component {
   constructor(props) {
@@ -14,9 +15,24 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({
-      todos: this.deepCopy(this.todosAPI.filerByStatus(Todo.ALL))
-    });
+    const showFilterListfromMap = this.props.showFilterListfromMap;
+    axios
+      .get('http://localhost:8080/api/todos', {
+        params: {
+          id: 1,
+          content: 'Remove unused imports',
+          status: 'active'
+        }
+      })
+      .then(res => {
+        const todos = res.data._embedded.todos;
+        console.log(todos);
+
+        showFilterListfromMap(todos, Todo.ALL);
+      })
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
   deepCopy(array) {
@@ -26,15 +42,13 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        <Header/>
+        <Header />
         <AddItemContainer />
         <ShowItemListContainer />
-        <FilterStatusContainer/>
-        
+        <FilterStatusContainer />
       </div>
     );
   }
 }
 
-
- export default App;
+export default App;

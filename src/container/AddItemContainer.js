@@ -1,13 +1,23 @@
-import {connect} from 'react-redux'
-import AddItem from "../component/AddItem";
-import {addMap} from '../actions/index'
+import { connect } from 'react-redux';
+import AddItem from '../component/AddItem';
 
-const mapStateToProps = (state, ownProps) =>({
-  todos:state.todos,
-  statusOfList:state.statusOfList
-})
+import Todo from '../model/Todo';
+import todosAPI from '../api/TodoResourseAPI';
 
-const mapDispatchToProps = (dispatch, ownProps) =>({
-  addfromMap:(todos) => dispatch(addMap (todos)),
-})
-export default connect(mapStateToProps, mapDispatchToProps)(AddItem)
+const mapStateToProps = (state, ownProps) => ({
+  todos: state.todos,
+  statusOfList: state.statusOfList
+});
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  addfromMap: content => {
+    todosAPI.add(new Todo(content), dispatch);
+  },
+  showFilterListfromMap: statusOfList => {
+    todosAPI.filerByStatus(statusOfList, dispatch);
+  }
+});
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AddItem);

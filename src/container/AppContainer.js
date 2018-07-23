@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import filterStatus from '../component/filterStatus';
-import todosAPI from '../api/TodoResourseAPI';
+import App from '../App';
+import { showFilterListMap } from '../actions/index';
 
 const mapStateToProps = (state, ownProps) => ({
   todos: state.todos,
@@ -8,11 +8,10 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  showFilterListfromMap: statusOfList => {
-    todosAPI.filerByStatus(statusOfList, dispatch);
-  }
+  showFilterListfromMap: (todos, statusOfList) =>
+    dispatch(showFilterListMap(todos, statusOfList))
 });
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(filterStatus);
+)(App);
