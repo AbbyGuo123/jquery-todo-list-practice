@@ -4,22 +4,23 @@ import axios from 'axios';
 
 const todosAPI = {
   todos: [],
-  add(item, dispatch) {
+  add(item, statusOfList, dispatch) {
     axios
       .post('http://localhost:8080/api/todos', {
         content: item.content,
         status: item.status
       })
       .then(res => {
+        if (statusOfList === Todo.ALL) statusOfList = 'completed,active';
         axios
           .get('http://localhost:8080/api/todos/search/statusOfTodos', {
             params: {
-              status: 'completed,active'
+              status: statusOfList
             }
           })
           .then(res => {
             const todos = res.data._embedded.todos;
-            dispatch(showFilterListMap(todos, Todo.ALL));
+            dispatch(showFilterListMap(todos, statusOfList));
             dispatch(addMap(todos));
             return todos;
           });
@@ -49,8 +50,8 @@ const todosAPI = {
       });
   },
   toggleActive(viewId, status, dispatch) {
-    if (status == 'complete') status = 'active';
-    else status = 'complete';
+    if (status == 'completed') status = 'active';
+    else status = 'completed';
     axios
       .patch('http://localhost:8080/api/todos/' + viewId, {
         status: status

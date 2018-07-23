@@ -7,6 +7,8 @@ import FilterStatusContainer from './container/FilterStatusContainer';
 import ShowItemListContainer from './container/ShowItemListContainer';
 import Header from './component/Header';
 import axios from 'axios';
+import 'antd/dist/antd.css';
+import { BrowserRouter, Route, Link } from 'react-router-dom';
 
 class App extends Component {
   constructor(props) {

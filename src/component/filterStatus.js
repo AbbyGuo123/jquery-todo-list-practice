@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Todo from '../model/Todo';
 import '../App.css';
 import classNames from 'classnames';
+import { Button } from 'antd';
 
 class filterStatus extends Component {
   constructor(props) {
@@ -21,40 +22,22 @@ class filterStatus extends Component {
       <div>
         <ul className="filters">
           <li>
-            <a
-              href="#all"
-              onClick={e => this.showFilterList(e)}
-              data-filter="all"
-              className={classNames({
-                selected: this.props.statusOfList === Todo.ALL
-              })}
-            >
+            <Button data-filter="all" onClick={e => this.showFilterList(e)}>
               ALL
-            </a>
+            </Button>
           </li>
           <li>
-            <a
-              href="#active"
-              onClick={e => this.showFilterList(e)}
-              data-filter="active"
-              className={classNames({
-                selected: this.props.statusOfList === Todo.ACTIVE
-              })}
-            >
+            <Button data-filter="active" onClick={e => this.showFilterList(e)}>
               Active
-            </a>
+            </Button>
           </li>
           <li>
-            <a
-              href="#completed"
-              onClick={e => this.showFilterList(e)}
+            <Button
               data-filter="completed"
-              className={classNames({
-                selected: this.props.statusOfList === Todo.COMPLETED
-              })}
+              onClick={e => this.showFilterList(e)}
             >
               Complete
-            </a>
+            </Button>
           </li>
         </ul>
       </div>

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { Button } from 'antd';
 import '../App.css';
 
 class AddItem extends Component {
@@ -12,7 +12,7 @@ class AddItem extends Component {
   add(event) {
     // if (event.keyCode === 13) {
     const addfromMap = this.props.addfromMap;
-    addfromMap(this.refs.newItem.value);
+    addfromMap(this.refs.newItem.value, this.props.statusOfList);
     this.refs.newItem.value = '';
     console.log(this.props.todos);
     // }
@@ -26,9 +26,9 @@ class AddItem extends Component {
           id="todo-creator"
           ref="newItem"
         />
-        <div className="button" onClick={e => this.add()}>
+        <Button type="primary" onClick={e => this.add()}>
           Add
-        </div>
+        </Button>
       </div>
     );
   }

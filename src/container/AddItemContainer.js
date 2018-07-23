@@ -10,8 +10,8 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  addfromMap: content => {
-    todosAPI.add(new Todo(content), dispatch);
+  addfromMap: (content, statusOfList) => {
+    todosAPI.add(new Todo(content), statusOfList, dispatch);
   },
   showFilterListfromMap: statusOfList => {
     todosAPI.filerByStatus(statusOfList, dispatch);
