@@ -43,12 +43,19 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
-        <Header />
-        <AddItemContainer />
-        <ShowItemListContainer />
-        <FilterStatusContainer />
-      </div>
+      <BrowserRouter>
+        <div className="container">
+          <Header />
+          <AddItemContainer />
+          <ShowItemListContainer />
+
+          <Link to="/api/todos/search/statusOfTodos" />
+          <Route
+            path="/api/todos/search/statusOfTodos"
+            component={FilterStatusContainer}
+          />
+        </div>
+      </BrowserRouter>
     );
   }
 }

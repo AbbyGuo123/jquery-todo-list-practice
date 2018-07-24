@@ -3,6 +3,8 @@ import Todo from '../model/Todo';
 import '../App.css';
 import classNames from 'classnames';
 import { Button } from 'antd';
+import { Link, Route } from 'react-router-dom';
+import ShowItemListContainer from '../container/ShowItemListContainer';
 
 class filterStatus extends Component {
   constructor(props) {
@@ -17,29 +19,44 @@ class filterStatus extends Component {
   deepCopy(array) {
     return JSON.parse(JSON.stringify(array));
   }
+
   render() {
+    let match = this.props.match;
     return (
       <div>
         <ul className="filters">
           <li>
-            <Button data-filter="all" onClick={e => this.showFilterList(e)}>
+            <Link
+              to={`${match.url}?status=completed,active`}
+              data-filter="all"
+              onClick={e => this.showFilterList(e)}
+            >
               ALL
-            </Button>
+            </Link>
           </li>
           <li>
-            <Button data-filter="active" onClick={e => this.showFilterList(e)}>
+            <Link
+              to={`${match.url}?status=active`}
+              data-filter="active"
+              onClick={e => this.showFilterList(e)}
+            >
               Active
-            </Button>
+            </Link>
           </li>
           <li>
-            <Button
+            <Link
+              to={`${match.url}?status=completed`}
               data-filter="completed"
               onClick={e => this.showFilterList(e)}
             >
               Complete
-            </Button>
+            </Link>
           </li>
         </ul>
+        <Route
+          path={`${match.url}/:topicId`}
+          component={ShowItemListContainer}
+        />
       </div>
     );
   }
